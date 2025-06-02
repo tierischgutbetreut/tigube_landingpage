@@ -7,41 +7,15 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="bg-[#eaede3] py-16 px-4 text-center">
         <div className="max-w-3xl mx-auto">
-          <div className="bg-white rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
-            <svg
-              width="40"
-              height="40"
-              viewBox="0 0 40 40"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-[#6b8e46]"
-            >
-              <path
-                d="M20 10C22.5 10 25 7.5 25 5C25 2.5 22.5 0 20 0C17.5 0 15 2.5 15 5C15 7.5 17.5 10 20 10Z"
-                fill="currentColor"
-              />
-              <path
-                d="M30 15C32.5 15 35 12.5 35 10C35 7.5 32.5 5 30 5C27.5 5 25 7.5 25 10C25 12.5 27.5 15 30 15Z"
-                fill="currentColor"
-              />
-              <path
-                d="M10 15C12.5 15 15 12.5 15 10C15 7.5 12.5 5 10 5C7.5 5 5 7.5 5 10C5 12.5 7.5 15 10 15Z"
-                fill="currentColor"
-              />
-              <path
-                d="M10 35C12.5 35 15 32.5 15 30C15 27.5 12.5 25 10 25C7.5 25 5 27.5 5 30C5 32.5 7.5 35 10 35Z"
-                fill="currentColor"
-              />
-              <path
-                d="M30 35C32.5 35 35 32.5 35 30C35 27.5 32.5 25 30 25C27.5 25 25 27.5 25 30C25 32.5 27.5 35 30 35Z"
-                fill="currentColor"
-              />
-            </svg>
+          <div className="mx-auto mb-6">
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/tigube_logo-J3hyYHZi3jUA1UTFYUClXzts56ILfD.png"
+              alt="tigube Logo"
+              className="h-12 w-auto mx-auto"
+            />
           </div>
 
-          <h1 className="text-4xl font-bold mb-4">
-            <span className="text-[#6b8e46]">tigube</span> startet bald!
-          </h1>
+          <h1 className="text-4xl font-bold mb-4">startet bald!</h1>
 
           <p className="text-gray-700 mb-8 max-w-2xl mx-auto">
             Die vertrauensvolle Plattform für professionelle Tierbetreuung in Deutschland.

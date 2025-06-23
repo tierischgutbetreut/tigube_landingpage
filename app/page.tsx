@@ -1,5 +1,4 @@
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { EmailForm } from "@/components/email-form"
 
 export default function LandingPage() {
   return (
@@ -23,13 +22,7 @@ export default function LandingPage() {
             Seien Sie unter den Ersten, die davon erfahren!
           </p>
 
-          <div className="max-w-md mx-auto">
-            <div className="mb-2">
-              <Input type="email" placeholder="Ihre E-Mail-Adresse" className="bg-white border-gray-200" />
-            </div>
-            <Button className="w-full bg-[#6b8e46] hover:bg-[#5a7a3a] text-white">Benachrichtigung erhalten</Button>
-            <p className="text-xs text-gray-500 mt-2">Kein Spam. Sie können sich jederzeit abmelden.</p>
-          </div>
+          <EmailForm variant="hero" />
         </div>
       </section>
 
@@ -164,10 +157,7 @@ export default function LandingPage() {
             Werden Sie Teil der tigube-Community und erleben Sie, wie einfach Tierbetreuung sein kann.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <Input type="email" placeholder="E-Mail-Adresse" className="bg-white text-gray-800 flex-grow" />
-            <Button className="bg-white text-[#6b8e46] hover:bg-gray-100">Anmelden</Button>
-          </div>
+          <EmailForm variant="cta" />
         </div>
       </section>
     </main>

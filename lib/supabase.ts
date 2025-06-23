@@ -1,28 +1,29 @@
 import { createClient } from "@supabase/supabase-js"
 
-// Environment variables (optional)
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+// Environment variables (now configured)
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://puvzrdnziuowznetwwey.supabase.co"
+const supabaseAnonKey =
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB1dnpyZG56aXVvd3puZXR3d2V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4MzU5ODIsImV4cCI6MjA2NDQxMTk4Mn0.VGkpwOJhZnhzQVJhqGqJXOLqE7zKqGzqQVJhqGqJXOL"
+const supabaseServiceKey =
+  process.env.SUPABASE_SERVICE_ROLE_KEY ||
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB1dnpyZG56aXVvd3puZXR3d2V5Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0ODgzNTk4MiwiZXhwIjoyMDY0NDExOTgyfQ.2xR99bvBLlOi8P1aCP5WxtO_r3njhLHfYPPWTw3YpF0"
 
 // Check if Supabase is configured
 export function isSupabaseConfigured(): boolean {
   return !!(supabaseUrl && supabaseAnonKey)
 }
 
-// Client-side Supabase client (only if configured)
-export const supabase = isSupabaseConfigured() ? createClient(supabaseUrl!, supabaseAnonKey!) : null
+// Client-side Supabase client
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
-// Server-side client für Server Actions (only if fully configured)
-export const supabaseAdmin =
-  isSupabaseConfigured() && supabaseServiceKey
-    ? createClient(supabaseUrl!, supabaseServiceKey, {
-        auth: {
-          autoRefreshToken: false,
-          persistSession: false,
-        },
-      })
-    : null
+// Server-side client für Server Actions
+export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
+  auth: {
+    autoRefreshToken: false,
+    persistSession: false,
+  },
+})
 
 // Typen für die Datenbank
 export interface EmailSignup {
@@ -36,27 +37,23 @@ export interface EmailSignup {
   unsubscribed_at?: string
 }
 
-// In-memory storage for demo mode
-const demoEmailSignups: EmailSignup[] = [
-  {
-    id: "demo-1",
-    email: "demo@example.com",
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-    source: "hero_section",
-    is_verified: false,
-  },
-  {
-    id: "demo-2",
-    email: "test@example.com",
-    created_at: new Date(Date.now() - 86400000).toISOString(), // Yesterday
-    updated_at: new Date(Date.now() - 86400000).toISOString(),
-    source: "cta_section",
-    is_verified: false,
-  },
-]
+// Database-specific types
+export interface Database {
+  public: {
+    Tables: {
+      email_signups: {
+        Row: EmailSignup
+        Insert: Omit<EmailSignup, "id" | "created_at" | "updated_at">
+        Update: Partial<Omit<EmailSignup, "id" | "created_at">>
+      }
+    }
+  }
+}
 
-// Demo functions for when Supabase is not configured
+// In-memory storage for demo mode (fallback)
+const demoEmailSignups: EmailSignup[] = []
+
+// Demo functions for when Supabase is not working
 export const demoStorage = {
   addEmail: (email: string, source: string): EmailSignup => {
     const newSignup: EmailSignup = {

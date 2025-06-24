@@ -12,6 +12,7 @@ interface EmailSubmissionResult {
 export async function submitEmail(prevState: any, formData: FormData): Promise<EmailSubmissionResult> {
   const email = formData.get("email") as string
   const source = (formData.get("source") as string) || "landing_page"
+  const userType = (formData.get("user_type") as string) || "unknown"
 
   // Validierung
   if (!email) {
@@ -19,6 +20,14 @@ export async function submitEmail(prevState: any, formData: FormData): Promise<E
       success: false,
       message: "Bitte geben Sie eine E-Mail-Adresse ein.",
       error: "EMAIL_REQUIRED",
+    }
+  }
+
+  if (!userType || userType === "") {
+    return {
+      success: false,
+      message: "Bitte wählen Sie aus, ob Sie Tierbesitzer oder Tierbetreuer sind.",
+      error: "USER_TYPE_REQUIRED",
     }
   }
 
@@ -34,7 +43,7 @@ export async function submitEmail(prevState: any, formData: FormData): Promise<E
 
   // Demo-Modus wenn Supabase nicht konfiguriert ist
   if (!isSupabaseConfigured() || !supabaseAdmin) {
-    console.log(`E-Mail-Anmeldung (Demo-Modus): ${email} von ${source}`)
+    console.log(`E-Mail-Anmeldung (Demo-Modus): ${email} als ${userType} von ${source}`)
 
     // Check if email already exists in demo storage
     const existingEmail = demoStorage.findEmail(email)
@@ -45,12 +54,19 @@ export async function submitEmail(prevState: any, formData: FormData): Promise<E
       }
     }
 
-    // Add to demo storage
-    demoStorage.addEmail(email, source)
+    // Add to demo storage with user type
+    demoStorage.addEmail(email, `${source}_${userType}`)
+
+    const userTypeText =
+      userType === "tierbesitzer"
+        ? "Tierbesitzer"
+        : userType === "tierbetreuer"
+          ? "Tierbetreuer"
+          : "Tierbesitzer und Tierbetreuer"
 
     return {
       success: true,
-      message: "Vielen Dank! Sie werden benachrichtigt, sobald tigube startet. (Demo-Modus)",
+      message: `Vielen Dank! Als ${userTypeText} werden Sie benachrichtigt, sobald tigube startet. (Demo-Modus)`,
     }
   }
 
@@ -58,7 +74,7 @@ export async function submitEmail(prevState: any, formData: FormData): Promise<E
     // Prüfen ob E-Mail bereits existiert
     const { data: existingEmail, error: checkError } = await supabaseAdmin
       .from("email_signups")
-      .select("email, unsubscribed_at")
+      .select("email, unsubscribed_at, source")
       .eq("email", email)
       .single()
 
@@ -80,7 +96,7 @@ export async function submitEmail(prevState: any, formData: FormData): Promise<E
           .update({
             unsubscribed_at: null,
             updated_at: new Date().toISOString(),
-            source: source,
+            source: `${source}_${userType}`,
           })
           .eq("email", email)
 
@@ -112,7 +128,7 @@ export async function submitEmail(prevState: any, formData: FormData): Promise<E
       .insert([
         {
           email: email,
-          source: source,
+          source: `${source}_${userType}`,
           is_verified: false,
         },
       ])
@@ -139,9 +155,16 @@ export async function submitEmail(prevState: any, formData: FormData): Promise<E
 
     console.log(`Neue E-Mail-Anmeldung gespeichert:`, data)
 
+    const userTypeText =
+      userType === "tierbesitzer"
+        ? "Tierbesitzer"
+        : userType === "tierbetreuer"
+          ? "Tierbetreuer"
+          : "Tierbesitzer und Tierbetreuer"
+
     return {
       success: true,
-      message: "Vielen Dank! Sie werden benachrichtigt, sobald tigube startet.",
+      message: `Vielen Dank! Als ${userTypeText} werden Sie benachrichtigt, sobald tigube startet.`,
     }
   } catch (error) {
     console.error("Unerwarteter Fehler:", error)
@@ -153,7 +176,7 @@ export async function submitEmail(prevState: any, formData: FormData): Promise<E
   }
 }
 
-// Admin-Funktion zum Abrufen aller E-Mail-Anmeldungen
+// Bestehende Funktionen bleiben unverändert...
 export async function getEmailSignups(): Promise<EmailSignup[]> {
   if (!isSupabaseConfigured() || !supabaseAdmin) {
     // Demo-Daten aus dem In-Memory-Storage zurückgeben

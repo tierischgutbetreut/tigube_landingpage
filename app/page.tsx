@@ -73,7 +73,7 @@ export default function LandingPage() {
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-[#6b8e46] rounded-full"></span>
-                  Sichere Buchung und Bezahlung
+                  Einfache Kontaktaufnahme
                 </li>
               </ul>
             </div>
@@ -106,11 +106,11 @@ export default function LandingPage() {
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-[#6b8e46] rounded-full"></span>
-                  Unterstützung und Schulungen
+                  Direkter Kundenkontakt
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-[#6b8e46] rounded-full"></span>
-                  Versicherungsschutz inklusive
+                  Lokale Aufträge finden
                 </li>
               </ul>
             </div>
@@ -252,18 +252,18 @@ export default function LandingPage() {
                 </div>
 
                 <div className="border border-gray-200 p-6 rounded-lg hover:shadow-md transition-shadow">
-                  <h4 className="font-bold mb-2">Sichere Bezahlung</h4>
-                  <p className="text-gray-600 text-sm">Automatische und sichere Abrechnung</p>
+                  <h4 className="font-bold mb-2">Bewertungssystem</h4>
+                  <p className="text-gray-600 text-sm">Sammeln Sie positive Bewertungen und bauen Sie Vertrauen auf</p>
                 </div>
 
                 <div className="border border-gray-200 p-6 rounded-lg hover:shadow-md transition-shadow">
-                  <h4 className="font-bold mb-2">Versicherung</h4>
-                  <p className="text-gray-600 text-sm">Vollständiger Versicherungsschutz inklusive</p>
+                  <h4 className="font-bold mb-2">Kalender-Integration</h4>
+                  <p className="text-gray-600 text-sm">Verwalten Sie Ihre Verfügbarkeit und Termine</p>
                 </div>
 
                 <div className="border border-gray-200 p-6 rounded-lg hover:shadow-md transition-shadow">
-                  <h4 className="font-bold mb-2">Support & Schulung</h4>
-                  <p className="text-gray-600 text-sm">Kontinuierliche Unterstützung und Weiterbildung</p>
+                  <h4 className="font-bold mb-2">Messaging-System</h4>
+                  <p className="text-gray-600 text-sm">Direkte Kommunikation mit Tierbesitzern</p>
                 </div>
 
                 <div className="border border-gray-200 p-6 rounded-lg hover:shadow-md transition-shadow">

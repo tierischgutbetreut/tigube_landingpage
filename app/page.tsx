@@ -419,7 +419,7 @@ export default function LandingPage() {
           </div>
 
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-            <p>&copy; 2024 tierisch gut betreut UG. Alle Rechte vorbehalten.</p>
+            <p>&copy; 2025 tierisch gut betreut UG. Alle Rechte vorbehalten.</p>
           </div>
         </div>
       </footer>

@@ -1,4 +1,5 @@
 import { EmailForm } from "@/components/email-form"
+import Link from "next/link"
 
 export default function LandingPage() {
   return (
@@ -376,6 +377,52 @@ export default function LandingPage() {
           </p>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-white py-8 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <div className="mb-4">
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/tigube_logo-J3hyYHZi3jUA1UTFYUClXzts56ILfD.png"
+                  alt="tigube Logo"
+                  className="h-8 w-auto"
+                />
+              </div>
+              <p className="text-gray-300 text-sm">Die vertrauensvolle Plattform für Tierbetreuung in Deutschland.</p>
+            </div>
+
+            <div>
+              <h4 className="font-bold mb-4">Rechtliches</h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link href="/impressum" className="text-gray-300 hover:text-white transition-colors">
+                    Impressum
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/datenschutz" className="text-gray-300 hover:text-white transition-colors">
+                    Datenschutz
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-bold mb-4">Kontakt</h4>
+              <div className="text-sm text-gray-300 space-y-1">
+                <p>info@tierischgutbetreut.de</p>
+                <p>+49 (0) 7732 - 988 50 91</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+            <p>&copy; 2024 tierisch gut betreut UG. Alle Rechte vorbehalten.</p>
+          </div>
+        </div>
+      </footer>
     </main>
   )
 }
